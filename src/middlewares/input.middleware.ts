@@ -12,7 +12,9 @@ const input = (schema: AnyZodObject) => (
     next()
   } catch (error) {
     if (error instanceof ZodError) {
-      return res.status(406).json(error.issues.map((issue) => issue.message))
+      const zodErrors = error.issues.map((issue) => issue.message)
+      console.log(zodErrors)
+      return res.status(406).json(zodErrors)
     }
     return httpErrorHandler(new Error('unexpected error'), res, 500)
   }

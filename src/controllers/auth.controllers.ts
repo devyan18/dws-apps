@@ -27,6 +27,7 @@ const registerCtrl = async (req: Request, res: Response) => {
       token
     })
   } catch (error) {
+    console.log(error)
     httpErrorHandler(new Error('Unexpected Error'), res, 500)
   }
 }

@@ -26,7 +26,7 @@ class UserServices {
     return user
   }
 
-  deativeUser = async (userId: string) => {
+  deactiveUser = async (userId: string) => {
     const user = await UserModel.findByIdAndUpdate(userId, { isActive: false }, { new: true })
     return user
   }

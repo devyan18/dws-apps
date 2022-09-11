@@ -19,11 +19,11 @@ const testingUsers = [
   }
 ]
 
-afterEach(() => {
-  return jest.restoreAllMocks()
-})
+// afterEach(() => {
+//   return jest.restoreAllMocks()
+// })
 
-describe('GET /users', () => {
+describe.skip('GET /users', () => {
   beforeAll(async () => {
     await UserModel.deleteMany({})
     for (const user of testingUsers) {
@@ -56,7 +56,7 @@ describe('GET /users', () => {
   })
 })
 
-describe('GET /users/:userId', () => {
+describe.skip('GET /users/:userId', () => {
   beforeAll(async () => {
     await UserModel.deleteMany({})
     for (const user of testingUsers) {
@@ -100,7 +100,7 @@ describe('GET /users/:userId', () => {
   })
 })
 
-describe('POST /users', () => {
+describe.skip('POST /users', () => {
   beforeEach(async () => {
     await UserModel.deleteMany({})
     for (const user of testingUsers) {
@@ -176,7 +176,7 @@ describe('POST /users', () => {
   })
 })
 
-describe('PUT /users/:userId', () => {
+describe.skip('PUT /users/:userId', () => {
   const username = 'test5'
   const newUsername = 'test_changed'
 

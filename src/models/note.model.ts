@@ -1,5 +1,5 @@
 import { model, Schema, Types } from 'mongoose'
-import { Note } from '../services/note.services'
+import { Note } from '../entities/notes.entity'
 import { IBookModel } from './book.model'
 import { IUserModel } from './user.model'
 

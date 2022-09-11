@@ -60,7 +60,7 @@ const editUserCtrl = async (req: Request, res: Response) => {
 const deleteUserCtrl = async (req: Request, res: Response) => {
   try {
     const userId = req.params.userId
-    const user = await userServices.deativeUser(userId)
+    const user = await userServices.deactiveUser(userId)
     res.json(user)
   } catch (error) {
     httpErrorHandler(new Error('Unexpected Error'), res, 500)
