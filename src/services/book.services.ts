@@ -8,8 +8,12 @@ class BookServices {
   }
 
   async getBookByBookId (bookId: string, userId: string) {
-    const book = await BookModel.findOne({ _id: bookId, user: userId })
-    return book
+    try {
+      const book = await BookModel.findOne({ _id: bookId, user: userId })
+      return book
+    } catch (error) {
+      return null
+    }
   }
 
   async createBook ({ name }: Book, userId: string) {

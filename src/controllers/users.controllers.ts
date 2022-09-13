@@ -5,7 +5,7 @@ import UserServices from '../services/user.services'
 
 const userServices = new UserServices()
 
-const getUsersCtrl = async (_req: Request, res: Response) => {
+const getUsersCtrl = async (req: Request, res: Response) => {
   try {
     const allUsers = await userServices.getAllUsers()
 
