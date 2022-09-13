@@ -47,7 +47,14 @@ const editBookCtrl = async (req: Request, res: Response) => {
   try {
     const bookId = req.params.bookId
     const book = await bookServices.editBook(bookId, req.body)
-    res.status(200).json(book)
+
+    if (!book) {
+      return res.status(404).json({
+        message: 'Book not found'
+      })
+    }
+
+    res.status(202).json(book)
   } catch (error) {
     httpErrorHandler(new Error('Unexpected Error'), res, 500)
   }

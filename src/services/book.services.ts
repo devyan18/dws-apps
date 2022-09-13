@@ -23,8 +23,12 @@ class BookServices {
   }
 
   async editBook (bookId: string, props: Partial<Book>) {
-    const book = await BookModel.findByIdAndUpdate(bookId, props, { new: true })
-    return book
+    try {
+      const book = await BookModel.findByIdAndUpdate(bookId, props, { new: true })
+      return book
+    } catch (error) {
+      return null
+    }
   }
 
   async deleteBook (bookId: string) {
