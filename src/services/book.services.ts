@@ -1,3 +1,4 @@
+import { Types } from 'mongoose'
 import { Book } from '../entities/book.entity'
 import BookModel from '../models/book.model'
 
@@ -32,8 +33,39 @@ class BookServices {
   }
 
   async deleteBook (bookId: string) {
-    const book = await BookModel.findByIdAndDelete(bookId)
-    return book
+    try {
+      const book = await BookModel.findByIdAndDelete(bookId)
+      return book
+    } catch (error) {
+      return null
+    }
+  }
+
+  async addNoteToBook (bookId: string | Types.ObjectId, noteId: string | Types.ObjectId) {
+    try {
+      const book = await BookModel.findByIdAndUpdate(bookId, { $push: { notes: noteId } }, { new: true })
+      return book
+    } catch (error) {
+      return null
+    }
+  }
+
+  async removeNoteFromBook (bookId: string | Types.ObjectId, noteId: string | Types.ObjectId) {
+    try {
+      const book = await BookModel.findByIdAndUpdate(bookId, { $pull: { notes: noteId } }, { new: true })
+      return book
+    } catch (error) {
+      return null
+    }
+  }
+
+  async existBook (bookId: string | Types.ObjectId): Promise<boolean> {
+    try {
+      const book = await BookModel.findById(bookId)
+      return book !== null
+    } catch (error) {
+      return false
+    }
   }
 }
 

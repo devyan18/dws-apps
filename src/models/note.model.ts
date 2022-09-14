@@ -5,7 +5,7 @@ import { IUserModel } from './user.model'
 
 export interface INoteModel extends Note, Document {
   user: IUserModel,
-  book: IBookModel
+  book: IBookModel | string | Types.ObjectId
 }
 
 const NoteSchema = new Schema<INoteModel>({

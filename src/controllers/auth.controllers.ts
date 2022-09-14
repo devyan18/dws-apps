@@ -15,7 +15,7 @@ const loginCtrl = async (req: Request, res: Response) => {
       token
     })
   } catch (error) {
-    httpErrorHandler(new Error('Error credentials'), res, 403)
+    httpErrorHandler(new Error('Error credentials'), res, 404)
   }
 }
 

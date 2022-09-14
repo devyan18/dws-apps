@@ -202,6 +202,26 @@ describe('PUT /users/:userId', () => {
   })
 })
 
+describe('DELETE /users/:userId', () => {
+  test('Should return status code 204', async () => {
+    const user = new UserModel({
+      username: 'test6',
+      email: 'test@gmail.com',
+      password: '123456'
+    })
+    await user.save()
+    const response = await request.delete(`/api/v1/users/${user._id}`)
+    expect(response.status).toBe(202)
+    expect(response.body.isActive).toBe(false)
+  })
+
+  test('Should return status code 404 if user not exist', async () => {
+    const notId = '000000000000000000000000'
+    const response = await request.delete(`/api/v1/users/${notId}`)
+    expect(response.status).toBe(404)
+  })
+})
+
 afterAll(async () => {
   await UserModel.deleteMany({})
   mongoose.connection.close()

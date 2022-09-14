@@ -12,13 +12,19 @@ export const userCreator = async (): Promise<string> => {
   return newUser._id
 }
 
-export const bookCreator = async (userId: string, dataBooks: {name:string}[]) => {
+export const bookCreator = async (userId: string, dataBooks: {name:string}[]): Promise<string[]> => {
   await BookModel.deleteMany({})
+
+  const uuids: string[] = []
+
   for (const book of dataBooks) {
     const newBook = new BookModel({
       name: book.name,
       user: userId
     })
+    uuids.push(newBook._id)
     await newBook.save()
   }
+
+  return uuids
 }

@@ -143,6 +143,45 @@ describe('PUT /books/:bookId', () => {
   })
 })
 
+describe('DELETE /books/:bookId', () => {
+  test('Should return status code 401 if dont have a session token', async () => {
+    const idUser = await userCreator()
+    const newBook = new BookModel({ name: 'test', user: idUser })
+    await newBook.save()
+    const response = await request.delete(`/api/v1/books/${newBook._id}`)
+    expect(response.status).toBe(401)
+  })
+
+  test('Should return status code 401 if have a session token invalid', async () => {
+    const idUser = await userCreator()
+    const newBook = new BookModel({ name: 'test', user: idUser })
+    await newBook.save()
+    const response = await request.delete(`/api/v1/books/${newBook._id}`)
+      .set('Authorization', 'Bearer 123456')
+    expect(response.status).toBe(401)
+  })
+
+  test('Should return status code 404 if have a idBook invalid', async () => {
+    const newIdUser = await userCreator()
+    const tokensito = createJwt(newIdUser)
+
+    const response = await request.delete('/api/v1/books/123456')
+      .set('Authorization', `Bearer ${tokensito}`)
+    expect(response.status).toBe(404)
+  })
+
+  test('Should return status code 202 if have a session token valid', async () => {
+    const idUser = await userCreator()
+    const newBook = new BookModel({ name: 'test', user: idUser })
+    await newBook.save()
+    const tokensito = createJwt(idUser)
+
+    const response = await request.delete(`/api/v1/books/${newBook._id}`)
+      .set('Authorization', `Bearer ${tokensito}`)
+    expect(response.status).toBe(202)
+  })
+})
+
 afterAll(async () => {
   await BookModel.deleteMany({})
   await UserModel.deleteMany({})

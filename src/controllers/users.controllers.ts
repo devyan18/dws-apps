@@ -61,7 +61,14 @@ const deleteUserCtrl = async (req: Request, res: Response) => {
   try {
     const userId = req.params.userId
     const user = await userServices.deactiveUser(userId)
-    res.json(user)
+
+    if (!user) {
+      return res.status(404).json({
+        message: 'User not found'
+      })
+    }
+
+    res.status(202).json(user)
   } catch (error) {
     httpErrorHandler(new Error('Unexpected Error'), res, 500)
   }

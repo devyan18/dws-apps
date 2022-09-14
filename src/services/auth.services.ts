@@ -13,6 +13,10 @@ class AuthServices {
       throw new Error('User not found')
     }
 
+    if (user.isActive === false) {
+      throw new Error('User is not active')
+    }
+
     const isMatch = await user.comparePassword(password)
 
     if (!isMatch) {

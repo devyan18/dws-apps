@@ -4,7 +4,7 @@ import { INoteModel } from './note.model'
 import { IUserModel } from './user.model'
 
 export interface IBookModel extends Document, Book {
-  notes: INoteModel[]
+  notes: Array<INoteModel | string | Types.ObjectId>
   user: IUserModel,
 }
 
