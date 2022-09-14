@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { User } from '../entities/user.entity'
 import httpErrorHandler from '../handlers/http_error.handler'
+import { IUserModel } from '../models/user.model'
 import AuthServices from '../services/auth.services'
 
 const authServices = new AuthServices()
@@ -32,4 +33,15 @@ const registerCtrl = async (req: Request, res: Response) => {
   }
 }
 
-export { loginCtrl, registerCtrl }
+const getUserByTokenCtrl = async (req: Request, res: Response) => {
+  try {
+    const user = req.user as IUserModel
+    res.status(200).json({
+      user
+    })
+  } catch (error) {
+    httpErrorHandler(new Error('Unexpected Error'), res, 500)
+  }
+}
+
+export { loginCtrl, registerCtrl, getUserByTokenCtrl }
