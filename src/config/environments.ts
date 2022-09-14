@@ -10,7 +10,9 @@ export default {
   MONGO_URI: (
     NODE_ENV === 'test'
       ? DEFAULT_MONGODB_URI_TEST
-      : MONGO_URI
+      : NODE_ENV === 'production'
+        ? MONGO_URI || ''
+        : DEFAULT_MONGODB_URI
   ) || DEFAULT_MONGODB_URI,
   JWT_SECRET: JWT_SECRET || DEFAULT_JWT_SECRET
 }
