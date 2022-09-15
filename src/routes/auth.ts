@@ -14,7 +14,9 @@ import {
 const router = Router()
 
 router.post('/register', input(registerSchema), registerCtrl)
+
 router.post('/login', input(loginSchema), loginCtrl)
+
 router.get('/token', passport.authenticate('jwt', { session: false }), getUserByTokenCtrl)
 
 export { router }
