@@ -26,7 +26,7 @@ class AuthServices {
     const userId = user._id
     const token = createJwt(userId)
 
-    return token
+    return { token, user }
   }
 
   async registerUser (props: User) {
@@ -43,7 +43,7 @@ class AuthServices {
 
     const token = createJwt(userId)
 
-    return token
+    return { token, newUser }
   }
 }
 

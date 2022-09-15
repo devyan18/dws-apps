@@ -10,10 +10,11 @@ const loginCtrl = async (req: Request, res: Response) => {
   const { email, password } = req.body
 
   try {
-    const token = await authServices.loginUser(email, password)
+    const { token, user } = await authServices.loginUser(email, password)
 
     res.status(203).json({
-      token
+      token,
+      user
     })
   } catch (error) {
     httpErrorHandler(new Error('Error credentials'), res, 404)
@@ -22,10 +23,11 @@ const loginCtrl = async (req: Request, res: Response) => {
 
 const registerCtrl = async (req: Request, res: Response) => {
   try {
-    const token = await authServices.registerUser(req.body as User)
+    const { token, newUser } = await authServices.registerUser(req.body as User)
 
     res.status(203).json({
-      token
+      token,
+      user: newUser
     })
   } catch (error) {
     console.log(error)
