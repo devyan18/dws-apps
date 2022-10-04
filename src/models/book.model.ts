@@ -13,6 +13,10 @@ const BookSchema = new Schema<IBookModel>({
     type: String,
     required: true
   },
+  describe: {
+    type: String,
+    required: true
+  },
   notes: [{
     type: Types.ObjectId,
     ref: 'Note'

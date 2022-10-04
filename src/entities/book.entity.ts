@@ -1,3 +1,4 @@
 export interface Book {
-  name: string
+  name: string,
+  describe: string
 }

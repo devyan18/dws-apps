@@ -39,6 +39,7 @@ const createBookCtrl = async (req: Request, res: Response) => {
     const book = await bookServices.createBook(req.body, userId._id)
     res.status(201).json(book)
   } catch (error) {
+    console.log(error)
     httpErrorHandler(new Error('Unexpected Error'), res, 500)
   }
 }

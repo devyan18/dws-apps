@@ -5,6 +5,7 @@ import BookModel from '../models/book.model'
 class BookServices {
   async getAllBooksByUser (userId: string) {
     const allBooks = await BookModel.find({ user: userId })
+      .sort({ updatedAt: -1 })
     return allBooks
   }
 
@@ -17,8 +18,8 @@ class BookServices {
     }
   }
 
-  async createBook ({ name }: Book, userId: string) {
-    const book = new BookModel({ name, user: userId })
+  async createBook ({ name, describe }: Book, userId: string) {
+    const book = new BookModel({ name, describe, user: userId })
     await book.save()
     return book
   }

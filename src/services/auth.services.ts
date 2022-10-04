@@ -25,7 +25,7 @@ class AuthServices {
 
     const userId = user._id
     const token = createJwt(userId)
-
+    console.log(token, user)
     return { token, user }
   }
 

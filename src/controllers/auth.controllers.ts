@@ -38,8 +38,11 @@ const registerCtrl = async (req: Request, res: Response) => {
 const getUserByTokenCtrl = async (req: Request, res: Response) => {
   try {
     const user = req.user as IUserModel
+
+    const { username, email, sexo, premium, isActive } = user
+
     res.status(200).json({
-      user
+      user: { username, email, sexo, premium, isActive }
     })
   } catch (error) {
     httpErrorHandler(new Error('Unexpected Error'), res, 500)
